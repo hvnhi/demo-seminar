@@ -1,3 +1,5 @@
+def image = ''
+
 pipeline {
     agent any
     tools{
@@ -6,35 +8,35 @@ pipeline {
 
     stages{
         stage('Build Maven'){
-            steps{
+            steps {
                 script {
-                        def AUTHOR = ""
-                        def COMMIT_MSG = ""
-                        def BRANCH_NAME = "master"
-                        def APP_NAME = "Develop"
-                        def changeFolders = []
+                    def AUTHOR = ""
+                    def COMMIT_MSG = ""
+                    def BRANCH_NAME = "master"
+                    def APP_NAME = "Develop"
+                    def changeFolders = []
 
-                        def changeLogSets = currentBuild.changeSets
-                        for (int i = 0; i < changeLogSets.size(); i++) {
-                            def entries = changeLogSets[i].items
-                            for (int j = 0; j < entries.length; j++) {
-                            def entry = entries[j]
-                            echo "${entry.commitId} by ${entry.author} on ${new Date(entry.timestamp)}: ${entry.msg}"
-                            
-                            AUTHOR = entry.author
-                            COMMIT_MSG += " %0A - ${entry.msg} "
-                            }
+                    def changeLogSets = currentBuild.changeSets
+                    for (int i = 0; i < changeLogSets.size(); i++) {
+                        def entries = changeLogSets[i].items
+                        for (int j = 0; j < entries.length; j++) {
+                        def entry = entries[j]
+                        echo "${entry.commitId} by ${entry.author} on ${new Date(entry.timestamp)}: ${entry.msg}"
+                        
+                        AUTHOR = entry.author
+                        COMMIT_MSG += " %0A - ${entry.msg} "
                         }
-                        env.APP_NAME = APP_NAME
-                        env.BRANCH_NAME = BRANCH_NAME
-                        env.AUTHOR = AUTHOR
-                        env.COMMIT_MSG = COMMIT_MSG
-                        env.IMAGE_NAME = "hvnhi/dev"
-                        sh 'mvn clean install'
                     }
+                    env.APP_NAME = APP_NAME
+                    env.BRANCH_NAME = BRANCH_NAME
+                    env.AUTHOR = AUTHOR
+                    env.COMMIT_MSG = COMMIT_MSG
+                    env.IMAGE_NAME = "hvnhi/dev"
+                    sh 'mvn clean install'
                 }
             }
         }
+
         stage('Build docker image'){
             steps{
                 script {
@@ -42,6 +44,7 @@ pipeline {
                 }
             }
         }
+
         stage('Push image to Hub'){
             steps{
                 script{
@@ -52,9 +55,10 @@ pipeline {
                 }
             }
         }
+
         stage('Deploy to k8s'){
-            steps{
-                script{
+            steps {
+                script {
                     kubernetesDeploy (configs: 'deploymentservice.yaml',kubeconfigId: 'k8s-config')
                 }
             }
