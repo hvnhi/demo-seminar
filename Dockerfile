@@ -12,7 +12,7 @@ WORKDIR ${APP_ROOT}
 
 COPY package.json ./
 
-RUN npm install
+RUN yarn install
 
 COPY . .
 
