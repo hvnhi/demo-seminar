@@ -1,6 +1,10 @@
-FROM node:latest
+# Dockerfile
+FROM node:18-alpine
 
-WORKDIR /usr/src/app
+ENV APP_ROOT /var/jenkins_home/workspace/develop
+# create destination directory
+RUN mkdir -p ${APP_ROOT}
+WORKDIR ${APP_ROOT}
 
 COPY package.json ./
 
