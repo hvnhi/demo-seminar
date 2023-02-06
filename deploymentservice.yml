@@ -17,6 +17,8 @@ spec:
       containers:
       - name: nodeserver
         image: hvnhi/nodeapp:latest
+        imagePullSecrets:
+        - name: docker-hub-token
         ports:
         - containerPort: 3000
         

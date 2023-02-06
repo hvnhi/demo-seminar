@@ -6,7 +6,7 @@ ENV APP_ROOT /var/jenkins_home/workspace/develop
 RUN mkdir -p ${APP_ROOT}
 WORKDIR ${APP_ROOT}
 
-COPY package.json ./
+COPY . ${APP_ROOT}
 
 RUN yarn install
 
