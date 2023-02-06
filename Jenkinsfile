@@ -4,9 +4,9 @@ pipeline {
   agent any
 
   stages {
-    stage('Perpare') {
+    stage('Prepare') {
       steps{
-        // git 'https://github.com/hvnhi/demo-seminar.git'
+        git 'https://github.com/hvnhi/demo-seminar.git'
         script {
           def AUTHOR = ""
           def COMMIT_MSG = ""
