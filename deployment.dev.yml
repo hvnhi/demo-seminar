@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nodeapp-deployment
+  name: hvnhi-nodeapp
   labels:
-    app: nodeapp
+    app: hvnhi-nodeapp
 spec:
   replicas: 2
   strategy: # change here
     type: RollingUpdate # strategy type is Recreate or RollingUpdate. Default is RollingUpdate
   selector:
     matchLabels:
-      app: nodeapp
+      app: hvnhi-nodeapp
   template:
     metadata:
       labels:
-        app: nodeapp 
+        app: hvnhi-nodeapp 
     spec:
       containers:
-      - name: nodeapp
+      - name: hvnhi-nodeapp
         image: hvnhi/nodeapp:latest
         imagePullSecrets:
         - name: docker-hub-token
@@ -29,13 +29,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nodeapp-service
+  name: hvnhi-nodeapp-service
 spec:
   selector:
-    app: nodeapp
+    app: hvnhi-nodeapp
   type: NodePort
   ports:
   - protocol: TCP
     port: 5000
     targetPort: 5000
-    nodePort: 31110
+    nodePort: 32000
