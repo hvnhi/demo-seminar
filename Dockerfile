@@ -6,11 +6,11 @@ ENV APP_ROOT /var/jenkins_home/workspace/develop
 RUN mkdir -p ${APP_ROOT}
 WORKDIR ${APP_ROOT}
 
-#COPY . ${APP_ROOT}
+COPY . ${APP_ROOT}
 
 RUN yarn install
 
-COPY . ${APP_ROOT}
+#COPY . ${APP_ROOT}
 
 
 EXPOSE 5000
