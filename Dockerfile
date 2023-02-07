@@ -10,7 +10,7 @@ COPY . ${APP_ROOT}
 
 RUN yarn install
 
-#COPY . ${APP_ROOT}
+COPY . ${APP_ROOT}
 
 
 EXPOSE 5000
