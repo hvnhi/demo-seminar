@@ -5,7 +5,9 @@ metadata:
   labels:
     app: nodeapp
 spec:
-  replicas: 1
+  replicas: 2
+  strategy: # change here
+    type: RollingUpdate # strategy type is Recreate or RollingUpdate. Default is RollingUpdate
   selector:
     matchLabels:
       app: nodeapp
@@ -15,14 +17,13 @@ spec:
         app: nodeapp 
     spec:
       containers:
-      - name: nodeserver
+      - name: nodeapp
         image: hvnhi/nodeapp:latest
         imagePullSecrets:
         - name: docker-hub-token
         ports:
-        - containerPort: 3000
-        
-        
+        - containerPort: 5000
+
 ---
 
 apiVersion: v1
@@ -31,10 +32,10 @@ metadata:
   name: nodeapp-service
 spec:
   selector:
-    app: nodeapp 
-  type: LoadBalancer
+    app: nodeapp
+  type: NodePort
   ports:
   - protocol: TCP
     port: 5000
-    targetPort: 3000
+    targetPort: 5000
     nodePort: 31110

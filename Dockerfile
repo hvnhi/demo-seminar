@@ -13,5 +13,5 @@ RUN yarn install
 COPY . ${APP_ROOT}
 
 
-EXPOSE 3000
+EXPOSE 5000
 CMD [ "node", "index.js" ]
