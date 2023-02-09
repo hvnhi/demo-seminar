@@ -28,7 +28,7 @@ pipeline {
           env.BRANCH_NAME = BRANCH_NAME
           env.AUTHOR = AUTHOR
           env.COMMIT_MSG = COMMIT_MSG
-          env.IMAGE_NAME = "hvnhi/nodeapp:v01"
+          env.IMAGE_NAME = "hvnhi/nodeapp:v02"
         }
       }
     }
