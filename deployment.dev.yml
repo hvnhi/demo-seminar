@@ -16,7 +16,6 @@ spec:
       labels:
         app: hvnhi-nodeapp 
     spec:
-      hostNetwork: true
       containers:
       - name: hvnhi-nodeapp
         image: $IMAGE_NAME
@@ -31,9 +30,10 @@ kind: Service
 metadata:
   name: hvnhi-nodeapp-service
 spec:
+  hostNetwork: true
   selector:
     app: hvnhi-nodeapp
-  type: NodePort
+  type: NodePort 
   ports:
   - protocol: TCP
     port: 5000
