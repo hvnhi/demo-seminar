@@ -30,12 +30,10 @@ kind: Service
 metadata:
   name: hvnhi-nodeapp-service
 spec:
-  hostNetwork: true
   selector:
     app: hvnhi-nodeapp
-  type: NodePort 
+  type: LoadBalancer 
   ports:
   - protocol: TCP
     port: 5000
     targetPort: 5000
-    nodePort: 32000
