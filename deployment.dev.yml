@@ -18,9 +18,8 @@ spec:
     spec:
       containers:
       - name: hvnhi-nodeapp
-        image: hvnhi/nodeapp:v05
-        imagePullSecrets:
-        - name: docker-hub-token
+        image: hvnhi/nodeapp:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 5000
 

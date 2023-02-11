@@ -28,7 +28,7 @@ pipeline {
           env.BRANCH_NAME = BRANCH_NAME
           env.AUTHOR = AUTHOR
           env.COMMIT_MSG = COMMIT_MSG
-          env.IMAGE_NAME = "hvnhi/nodeapp:v05"
+          env.IMAGE_NAME = "hvnhi/nodeapp:latest"
         }
       }
     }
@@ -56,7 +56,7 @@ pipeline {
       steps {
         script {
             // kubernetesDeploy(configs: 'deployment.dev.yml', kubeConfig: [path: ''], kubeconfigId: 'k8s-config')
-            kubernetesDeploy (configs: 'deployment.dev.yml', dockerCredentials: [[credentialsId: 'docker-hub-token', url: 'https://index.docker.io/v1/']], kubeConfig: [path: ''], kubeconfigId: 'k8s-config', secretName: 'docker-hub-token')
+            kubernetesDeploy (configs: 'deployment.dev.yml', kubeConfig: [path: ''], kubeconfigId: 'k8s-config')
             // withKubeConfig([credentialsId: 'k8s-config', serverUrl: 'https://kubernetes.default.svc' ]) {
             //   sh "kubectl apply -f deployment.dev.yaml"
             //   sh """kubectl patch deployment hvnhi-nodeapp -p '{ \"spec\":{\"template\":{\"metadata\":{\"labels\":{\"buildNumber\":\"$BUILD_NUMBER\"}}}}}' """
