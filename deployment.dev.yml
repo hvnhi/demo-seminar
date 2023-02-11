@@ -37,16 +37,3 @@ spec:
   - protocol: TCP
     port: 5000
     targetPort: 5000
-
-apiVersion: apps/v1
-kind: Pod
-metadata:
-  name: hvnhi-nodeapp
-spec:
-  containers:
-  - image: $IMAGE_NAME
-    name: hvnhi-nodeapp
-    ports:
-    - containerPort: 5000
-      hostPort: 5000
-      protocol: TCP
