@@ -19,7 +19,7 @@ pipeline {
             for (int j = 0; j < entries.length; j++) {
               def entry = entries[j]
               echo "${entry.commitId} by ${entry.author} on ${new Date(entry.timestamp)}: ${entry.msg}"
-              
+              echo "Build number: ${BUILD_NUMBER}"
               AUTHOR = entry.author
               COMMIT_MSG += " %0A - ${entry.msg} "
             }
