@@ -16,6 +16,7 @@ spec:
       labels:
         app: hvnhi-nodeapp 
     spec:
+      hostNetwork: true
       containers:
       - name: hvnhi-nodeapp
         image: $IMAGE_NAME
