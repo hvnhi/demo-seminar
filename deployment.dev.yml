@@ -7,7 +7,7 @@ metadata:
 spec:
   replicas: 1
   strategy: # change here
-    type: RollingUpdate # strategy type is Recreate or RollingUpdate. Default is RollingUpdate
+    type: Recreate # strategy type is Recreate or RollingUpdate. Default is RollingUpdate
   selector:
     matchLabels:
       app: hvnhi-nodeapp
@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: hvnhi-nodeapp
-        image: hvnhi/nodeapp:v03
+        image: hvnhi/nodeapp:lastest
         imagePullSecrets:
         - name: docker-hub-token
         ports:
