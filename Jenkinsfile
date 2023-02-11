@@ -55,10 +55,8 @@ pipeline {
     stage('Deploy') {
       steps {
         script {
-            // kubernetesDeploy(configs: 'deployment.dev.yml', kubeConfig: [path: ''], kubeconfigId: 'k8s-config')
-            withKubeConfig([credentialsId: 'k8s-config', serverUrl: 'http:// 192.168.49.2:8443' ]) {
-              sh "kubectl apply -f deployment.dev.yaml"
-            }
+            kubernetesDeploy(configs: 'deployment.dev.yml', kubeConfig: [path: ''], kubeconfigId: 'k8s-config')
+            sh 'kubectl patch deployment hvnhi-nodeapp -p "{\\"spec\\": {\\"template\\": {\\"metadata\\": { \\"labels\\": {  \\"redeploy\\": \\"$(date +%s)\\"}}}}}"'
         }
       }
     }
