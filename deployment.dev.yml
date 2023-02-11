@@ -32,7 +32,7 @@ metadata:
 spec:
   selector:
     app: hvnhi-nodeapp
-  type: LoadBalancer 
+  type: NodePort 
   ports:
   - protocol: TCP
     port: 5000
