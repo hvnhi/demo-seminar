@@ -5,7 +5,7 @@ metadata:
   labels:
     app: hvnhi-nodeapp
 spec:
-  replicas: 2
+  replicas: 1
   strategy: # change here
     type: RollingUpdate # strategy type is Recreate or RollingUpdate. Default is RollingUpdate
   selector:
