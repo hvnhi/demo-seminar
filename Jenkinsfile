@@ -58,7 +58,6 @@ pipeline {
             // kubernetesDeploy(configs: 'deployment.dev.yml', kubeConfig: [path: ''], kubeconfigId: 'k8s-config')
             withKubeConfig([credentialsId: 'k8s-config', serverUrl: 'http:// 192.168.49.2:8443' ]) {
               sh "kubectl apply -f deployment.dev.yaml"
-              sh """kubectl patch deployment hvnhi-nodeapp -p '{ \"spec\":{\"template\":{\"metadata\":{\"labels\":{\"buildNumber\":\"$BUILD_NUMBER\"}}}}}' """
             }
         }
       }
