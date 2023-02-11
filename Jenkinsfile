@@ -19,7 +19,6 @@ pipeline {
             for (int j = 0; j < entries.length; j++) {
               def entry = entries[j]
               echo "${entry.commitId} by ${entry.author} on ${new Date(entry.timestamp)}: ${entry.msg}"
-              echo "Build number: ${BUILD_NUMBER}"
               AUTHOR = entry.author
               COMMIT_MSG += " %0A - ${entry.msg} "
             }
@@ -28,7 +27,7 @@ pipeline {
           env.BRANCH_NAME = BRANCH_NAME
           env.AUTHOR = AUTHOR
           env.COMMIT_MSG = COMMIT_MSG
-          env.IMAGE_NAME = "hvnhi/nodeapp:v06"
+          env.IMAGE_NAME = "hvnhi/nodeapp:v1.0.${BUILD_NUMBER}"
         }
       }
     }
