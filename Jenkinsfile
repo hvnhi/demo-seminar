@@ -47,6 +47,7 @@ pipeline {
           withDockerRegistry(credentialsId: 'docker-hub-token', url: 'https://index.docker.io/v1/') {
               image.push()
           }
+          sh "docker image rm ${env.IMAGE_NAME}"
         }
       }
     }
@@ -68,7 +69,6 @@ pipeline {
   post {
     always {
       cleanWs()
-      sh "docker system prune --all"
     }
 
     success {

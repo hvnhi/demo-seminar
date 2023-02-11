@@ -1,39 +1,12 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: Pod
 metadata:
   name: hvnhi-nodeapp
-  labels:
-    app: hvnhi-nodeapp
 spec:
-  replicas: 1
-  strategy: # change here
-    type: Recreate # strategy type is Recreate or RollingUpdate. Default is RollingUpdate
-  selector:
-    matchLabels:
-      app: hvnhi-nodeapp
-  template:
-    metadata:
-      labels:
-        app: hvnhi-nodeapp 
-    spec:
-      containers:
-      - name: hvnhi-nodeapp
-        image: $IMAGE_NAME
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 5000
-
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: hvnhi-nodeapp-service
-spec:
-  selector:
-    app: hvnhi-nodeapp
-  type: NodePort 
-  ports:
-  - protocol: TCP
-    port: 5000
-    targetPort: 5000
+  containers:
+  - image: $IMAGE_NAME
+    name: hvnhi-nodeapp
+    ports:
+    - containerPort: 5000
+      hostPort: 5000
+      protocol: TCP
