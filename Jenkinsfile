@@ -56,10 +56,11 @@ pipeline {
       steps {
         script {
             // kubernetesDeploy(configs: 'deployment.dev.yml', kubeConfig: [path: ''], kubeconfigId: 'k8s-config')
-            withKubeConfig([credentialsId: 'k8s-config', serverUrl: 'https://kubernetes.default.svc' ]) {
-              sh "kubectl apply -f deployment.dev.yaml"
-              sh """kubectl patch deployment hvnhi-nodeapp -p '{ \"spec\":{\"template\":{\"metadata\":{\"labels\":{\"buildNumber\":\"$BUILD_NUMBER\"}}}}}' """
-            }
+            kubernetesDeploy (configs: 'deployment.dev.yml', dockerCredentials: [[credentialsId: 'docker-hub-token', url: 'https://index.docker.io/v1/']], kubeConfig: [path: ''], kubeconfigId: 'k8s-config', secretName: 'docker-hub-token')
+            // withKubeConfig([credentialsId: 'k8s-config', serverUrl: 'https://kubernetes.default.svc' ]) {
+            //   sh "kubectl apply -f deployment.dev.yaml"
+            //   sh """kubectl patch deployment hvnhi-nodeapp -p '{ \"spec\":{\"template\":{\"metadata\":{\"labels\":{\"buildNumber\":\"$BUILD_NUMBER\"}}}}}' """
+            // }
         }
       }
     }
