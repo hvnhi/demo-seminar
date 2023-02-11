@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: hvnhi-nodeapp
-        image: hvnhi/nodeapp
+        image: $IMAGE_NAME
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
