@@ -13,6 +13,9 @@ spec:
       app: hvnhi-nodeapp
   template:
     metadata:
+      hostNetwork: true
+      hostPort: 5000
+      name: hnvhi-newpod
       labels:
         app: hvnhi-nodeapp 
     spec:
