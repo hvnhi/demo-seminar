@@ -21,7 +21,7 @@ app.get('/', function (req, res) {
             </a>
         </div>
     </div>
-    <div style="font-size: 36px; font-weight: bold">Welcome to seminar!!</div>
+    <div style="font-size: 36px; font-weight: bold">Welcome to seminar!!!</div>
     <ol style="font-size: 24px">
         <li>Giới thiệu mô hình</li>
         <li>Jenkins và Syntax</li>
