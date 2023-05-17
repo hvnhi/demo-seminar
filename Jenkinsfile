@@ -32,38 +32,38 @@ pipeline {
       }
     }
 
-    stage('Build') {
-      steps {
-        script {
-          image = docker.build("${env.IMAGE_NAME}", "-f Dockerfile .")
-        }
-      }
-    }
+    // stage('Build') {
+    //   steps {
+    //     script {
+    //       image = docker.build("${env.IMAGE_NAME}", "-f Dockerfile .")
+    //     }
+    //   }
+    // }
 
-    stage('Push') {
-      steps {
-        script {
-          // This step should not normally be used in your script. Consult the inline help for details.
-          withDockerRegistry(credentialsId: 'docker-hub-token', url: 'https://index.docker.io/v1/') {
-              image.push()
-          }
-          sh "docker image rm ${env.IMAGE_NAME}"
-        }
-      }
-    }
+    // stage('Push') {
+    //   steps {
+    //     script {
+    //       // This step should not normally be used in your script. Consult the inline help for details.
+    //       withDockerRegistry(credentialsId: 'docker-hub-token', url: 'https://index.docker.io/v1/') {
+    //           image.push()
+    //       }
+    //       sh "docker image rm ${env.IMAGE_NAME}"
+    //     }
+    //   }
+    // }
 
-    stage('Deploy') {
-      steps {
-        script {
-            // kubernetesDeploy(configs: 'deployment.dev.yml', kubeConfig: [path: ''], kubeconfigId: 'k8s-config')
-            kubernetesDeploy (configs: 'deployment.dev.yml', kubeConfig: [path: ''], kubeconfigId: 'k8s-config', enableConfigSubstitution: true)
-            // withKubeConfig([credentialsId: 'k8s-config', serverUrl: 'https://kubernetes.default.svc' ]) {
-            //   sh "kubectl apply -f deployment.dev.yaml"
-            //   sh """kubectl patch deployment hvnhi-nodeapp -p '{ \"spec\":{\"template\":{\"metadata\":{\"labels\":{\"buildNumber\":\"$BUILD_NUMBER\"}}}}}' """
-            // }
-        }
-      }
-    }
+    // stage('Deploy') {
+    //   steps {
+    //     script {
+    //         // kubernetesDeploy(configs: 'deployment.dev.yml', kubeConfig: [path: ''], kubeconfigId: 'k8s-config')
+    //         kubernetesDeploy (configs: 'deployment.dev.yml', kubeConfig: [path: ''], kubeconfigId: 'k8s-config', enableConfigSubstitution: true)
+    //         // withKubeConfig([credentialsId: 'k8s-config', serverUrl: 'https://kubernetes.default.svc' ]) {
+    //         //   sh "kubectl apply -f deployment.dev.yaml"
+    //         //   sh """kubectl patch deployment hvnhi-nodeapp -p '{ \"spec\":{\"template\":{\"metadata\":{\"labels\":{\"buildNumber\":\"$BUILD_NUMBER\"}}}}}' """
+    //         // }
+    //     }
+    //   }
+    // }
   }
     
   post {
