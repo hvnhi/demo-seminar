@@ -10,6 +10,7 @@ pipeline {
         script {
           def AUTHOR = ""
           def COMMIT_MSG = ""
+          def BRANCH_NAME = "master"
           def APP_NAME = "Develop"
           def changeFolders = []
           def changeLogSets = currentBuild.changeSets
